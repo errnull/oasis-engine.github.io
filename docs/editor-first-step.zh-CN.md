@@ -1,8 +1,8 @@
 ---
 order: 1
-title: 快速上手
+title: 创建一个旋转立方体
 type: 编辑器
-group: 介绍
+group: 快速上手
 label: 编辑器/介绍
 ---
 

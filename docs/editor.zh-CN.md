@@ -2,7 +2,7 @@
 order: 0
 title: 关于 Oasis Editor
 type: 编辑器
-group: 介绍
+group: 快速上手
 label: 编辑器/介绍
 ---
 
