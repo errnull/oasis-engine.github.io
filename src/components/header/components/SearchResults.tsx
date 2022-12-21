@@ -1,8 +1,8 @@
 import { Book, CodeBracketsSquare, Puzzle } from 'iconoir-react';
 import { useContext } from 'react';
 import { useIntl } from 'react-intl';
-import { styled } from '../../../ui/design-system';
-import { Tabs, TabsContent, TabsList } from '../../../ui/Tabs';
+import { styled } from "@oasis-engine/editor-design-system";
+import { Tabs, TabsContent, TabsList } from '@oasis-engine/editor-components';
 import { AppContext } from '../../contextProvider';
 import { searchAPI, searchDoc } from '../headerUtils';
 import DocSearchRes from './SearchResult';
@@ -63,11 +63,19 @@ const SearchResult = (props: ISearchResProps) => {
               pageSize: PAGE_SIZE,
               pageNo: "0",
               type: "markdown",
-              lang: context.lang
+              lang: context.lang === 'cn' ? 'zh-CN' : 'en'
             }),
             category: "category",
             categoryReg: /\ntype:(.+)\n/,
-            link: (data: any) => `/docs/${context.version}/${context.lang}/${data.filename.slice(0, -3)}`,
+            link: (data: any) => {
+              let title = data.filename.slice(0, -3);
+
+              if (context.lang === 'cn') {
+                title = title.replace('.zh-CN', '');
+              }
+
+              return `/docs/${context.version}/${context.lang}/${title}`
+            },
             setLoadingSearchResult: props.setLoadingSearchResult,
             icon: <Book />
           }}
@@ -109,7 +117,7 @@ const SearchResult = (props: ISearchResProps) => {
               pageNo: "0"
             }),
             category: "kindString",
-            link: (data: any) => `/api/${context.version}/${data.name}`,
+            link: (data: any) => `/api/${context.version}/core/${data.name}`,
             setLoadingSearchResult: props.setLoadingSearchResult,
             icon: <Puzzle />
           }}
